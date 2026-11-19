@@ -1,0 +1,370 @@
+
+/* ==============================
+   1. Global Settings
+============================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #0b1120;
+    color: #e8eef8;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==============================
+   2. Navigation Bar
+============================== */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #101a2d;
+    border-bottom: 1px solid #25334d;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.logo span:last-child {
+    color: #36d6b5;
+}
+
+.logo-icon {
+    color: #36d6b5;
+    margin-right: 7px;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navbar nav a {
+    color: #aebbd0;
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.navbar nav a:hover {
+    color: #36d6b5;
+}
+
+/* ==============================
+   3. Hero Section
+============================== */
+
+.hero {
+    min-height: 570px;
+    padding: 90px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    background:
+        radial-gradient(circle at 80% 40%, #153b4a 0%, transparent 35%),
+        #0b1120;
+}
+
+.hero-content {
+    max-width: 620px;
+}
+
+.hero-label,
+.section-label {
+    color: #36d6b5;
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: #f4f7fc;
+}
+
+.hero h1 span {
+    display: block;
+    color: #36d6b5;
+}
+
+.hero-description {
+    max-width: 540px;
+    color: #aebbd0;
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.primary-button {
+    display: inline-block;
+    padding: 13px 28px;
+    background-color: #36d6b5;
+    color: #07151b;
+    font-weight: bold;
+    border-radius: 7px;
+    transition: 0.3s ease;
+}
+
+.primary-button:hover {
+    background-color: #65ebce;
+    transform: translateY(-3px);
+}
+
+/* ==============================
+   4. Hero Visual Card
+============================== */
+
+.hero-visual {
+    width: 340px;
+    flex-shrink: 0;
+}
+
+.security-card {
+    padding: 30px;
+    background: linear-gradient(145deg, #172943, #101b2d);
+    border: 1px solid #304663;
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.security-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.security-card h3 {
+    color: #36d6b5;
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.security-card p {
+    color: #aebbd0;
+    font-size: 13px;
+}
+
+.security-line {
+    height: 1px;
+    background-color: #304663;
+    margin: 18px 0;
+}
+
+/* ==============================
+   5. Labs Section
+============================== */
+
+.labs-section {
+    padding: 90px 8%;
+    background-color: #101a2d;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 50px;
+}
+
+.section-heading h2,
+.about-content h2 {
+    font-size: 34px;
+    margin-bottom: 14px;
+    color: #f4f7fc;
+}
+
+.section-heading > p:last-child {
+    color: #aebbd0;
+    font-size: 15px;
+}
+
+.labs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ==============================
+   6. Lab Cards
+============================== */
+
+.lab-card {
+    position: relative;
+    padding: 30px;
+    min-height: 310px;
+    background-color: #17243a;
+    border: 1px solid #2a3b55;
+    border-radius: 12px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.lab-card:hover {
+    transform: translateY(-8px);
+    border-color: #36d6b5;
+}
+
+.lab-number {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    color: #60728c;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.lab-icon {
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.lab-card h3 {
+    color: #f4f7fc;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.lab-card p {
+    color: #aebbd0;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.lab-link {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    color: #36d6b5;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.lab-link span {
+    transition: transform 0.3s ease;
+}
+
+.lab-link:hover span {
+    transform: translateX(5px);
+}
+
+/* ==============================
+   7. About Section
+============================== */
+
+.about-section {
+    padding: 85px 10%;
+    text-align: center;
+    background-color: #0b1120;
+}
+
+.about-content {
+    max-width: 750px;
+    margin: auto;
+}
+
+.about-content p:not(.section-label) {
+    color: #aebbd0;
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+/* ==============================
+   8. Footer
+============================== */
+
+.footer {
+    padding: 25px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background-color: #101a2d;
+    border-top: 1px solid #25334d;
+    color: #8191a9;
+    font-size: 13px;
+}
+
+/* ==============================
+   9. Responsive Design
+============================== */
+
+@media (max-width: 900px) {
+    .hero {
+        padding: 70px 7%;
+        gap: 35px;
+    }
+
+    .hero-visual {
+        width: 290px;
+    }
+
+    .labs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navbar nav {
+        gap: 22px;
+    }
+
+    .hero {
+        padding: 60px 7%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-visual {
+        width: 100%;
+    }
+
+    .labs-section {
+        padding: 65px 6%;
+    }
+
+    .labs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2,
+    .about-content h2 {
+        font-size: 28px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}

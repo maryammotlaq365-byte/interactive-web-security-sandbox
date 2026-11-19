@@ -1,0 +1,258 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #0b1220;
+    color: #e8eefb;
+    line-height: 1.6;
+}
+
+a {
+    color: #70a5ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+header {
+    background: #111c30;
+    padding: 20px 0;
+    border-bottom: 1px solid #263957;
+}
+
+header h1 {
+    color: #ffffff;
+    font-size: 28px;
+}
+
+header p {
+    color: #aebbd2;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+main {
+    padding: 35px 0;
+}
+
+section {
+    background: #14213a;
+    border: 1px solid #293e60;
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+h2 {
+    color: #8db7ff;
+    margin-bottom: 15px;
+}
+
+h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #c5d1e8;
+    margin-bottom: 12px;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s ease;
+}
+
+button:hover {
+    filter: brightness(1.12);
+}
+
+.payload-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.payload-btn,
+.mode-btn {
+    padding: 11px 17px;
+    border: 1px solid #526b96;
+    border-radius: 8px;
+    background: #1c3153;
+    color: #ffffff;
+}
+
+.payload-btn.active,
+.mode-btn.selected {
+    background: #2854a3;
+    border-color: #70a5ff;
+}
+
+.demo-stage {
+    position: relative;
+    min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #243c67, #17233e);
+    border: 1px solid #526b96;
+}
+
+.decoy-content {
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.reward-icon {
+    font-size: 45px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.decoy-content p {
+    color: #c5d1e8;
+    margin-bottom: 18px;
+}
+
+.claim-btn {
+    border: none;
+    padding: 13px 24px;
+    border-radius: 8px;
+    background: #f0b94c;
+    color: #172033;
+    font-weight: bold;
+    position: relative;
+    z-index: 3;
+}
+
+#attack-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: 0.03;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.demo-stage.fixed #attack-frame {
+    display: none;
+}
+
+.hint {
+    margin-top: 12px;
+    color: #9eacc4;
+    font-size: 13px;
+}
+
+.result {
+    background: #0e1729;
+    border: 1px solid #344763;
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 18px;
+    color: #ffffff;
+    min-height: 50px;
+}
+
+.code-block {
+    background: #080e19;
+    border: 1px solid #344763;
+    border-radius: 8px;
+    padding: 18px;
+    overflow-x: auto;
+    margin-top: 12px;
+}
+
+pre {
+    color: #d5e3ff;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.vulnerable-code {
+    border-left: 4px solid #e45d68;
+}
+
+.fixed-code {
+    border-left: 4px solid #42c98b;
+}
+
+.mode-buttons {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.status.vulnerable {
+    background: #57232b;
+    color: #ff9ba3;
+}
+
+.status.fixed {
+    background: #164b37;
+    color: #8af0bd;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    color: #8999b5;
+    border-top: 1px solid #263957;
+}
+
+@media (max-width: 600px) {
+    header h1 {
+        font-size: 23px;
+    }
+
+    section {
+        padding: 17px;
+    }
+
+    .payload-buttons,
+    .mode-buttons {
+        flex-direction: column;
+    }
+
+    .payload-btn,
+    .mode-btn {
+        width: 100%;
+    }
+
+    .demo-stage {
+        min-height: 250px;
+    }
+}
+

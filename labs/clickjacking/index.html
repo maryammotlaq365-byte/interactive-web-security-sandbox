@@ -1,0 +1,188 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clickjacking Lab | Security Sandbox</title>
+    <link rel="stylesheet" href="../../css/clickjacking.css">
+</head>
+<body>
+
+    <header class="topbar">
+        <a href="../../index.html" class="brand">SECURITY SANDBOX</a>
+        <a href="../../index.html" class="back-link">← Back to Home</a>
+    </header>
+
+    <main class="container">
+
+        <section class="intro">
+            <span class="lab-label">INTERACTIVE SECURITY LAB 01</span>
+            <h1>Clickjacking</h1>
+            <p>
+                Learn how attackers trick users into clicking hidden
+                elements on a website without their knowledge.
+            </p>
+        </section>
+
+        <section class="info-card">
+            <h2>01. What is Clickjacking?</h2>
+            <p>
+                Clickjacking is a UI redressing attack where an attacker
+                tricks a user into clicking an invisible or disguised
+                element, causing an unintended action.
+            </p>
+            <p><strong>OWASP:</strong> A05:2021 – Security Misconfiguration</p>
+            <p><strong>CWE:</strong> CWE-1021 – Improper Restriction of
+                Rendered UI Layers or Frames</p>
+        </section>
+
+        <section class="demo-card">
+            <div class="section-heading">
+                <div>
+                    <span class="step-label">02. TRY THE ATTACK</span>
+                    <h2>Interactive Demonstration</h2>
+                </div>
+                <span id="mode-status" class="status vulnerable">
+                    VULNERABLE
+                </span>
+            </div>
+
+            <p class="description">
+                Choose an action, then click the button below to see
+                what happens in each mode.
+            </p>
+
+            <div class="payloads">
+                <button class="payload-btn active" data-action="Change Email">
+                    Payload 1: Change Email
+                </button>
+                <button class="payload-btn" data-action="Enable Account Setting">
+                    Payload 2: Enable Setting
+                </button>
+                <button class="payload-btn" data-action="Confirm Transfer">
+                    Payload 3: Confirm Transfer
+                </button>
+            </div>
+
+            <div class="demo-stage" id="demo-stage">
+                <div class="decoy-content">
+                    <span class="reward-icon">🎁</span>
+                    <h3>Congratulations!</h3>
+                    <p>Click below to claim your free reward.</p>
+                    <button class="claim-btn" id="claim-btn">
+                        Claim Your Reward
+                    </button>
+                </div>
+
+                <iframe
+                    id="attack-frame"
+                    title="Simulated hidden target"
+                    sandbox="allow-scripts"
+                ></iframe>
+            </div>
+
+            <p class="hint">
+                Try clicking the reward button in Vulnerable mode.
+            </p>
+
+            <div id="result" class="result" aria-live="polite">
+                Waiting for your interaction...
+            </div>
+
+            <div class="mode-controls">
+                <button id="vulnerable-btn" class="mode-btn selected">
+                    Vulnerable Mode
+                </button>
+                <button id="fixed-btn" class="mode-btn">
+                    Fixed Mode
+                </button>
+            </div>
+        </section>
+
+        <section class="code-card">
+            <h2>03. Vulnerable Code</h2>
+            <p>
+                The vulnerable website does not restrict other websites
+                from embedding it inside an iframe.
+            </p>
+            <pre><code>&lt;!-- Vulnerable server response --&gt;
+HTTP/1.1 200 OK
+Content-Type: text/html
+
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;button&gt;Confirm Account Action&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <p class="warning">
+                <strong>Vulnerable point:</strong> The response has no
+                frame protection policy, so another website may embed
+                the page in a frame.
+            </p>
+        </section>
+
+        <section class="code-card">
+            <h2>04. The Fix</h2>
+            <p>
+                The server should prevent unauthorized websites from
+                embedding sensitive pages.
+            </p>
+            <pre><code>HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Security-Policy: frame-ancestors 'none'
+X-Frame-Options: DENY
+
+&lt;html&gt;
+  &lt;body&gt;
+    &lt;button&gt;Confirm Account Action&lt;/button&gt;
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+            <p class="success">
+                <strong>Fixed point:</strong> The browser blocks the page
+                from being embedded in a frame.
+            </p>
+        </section>
+
+        <section class="impact-card">
+            <h2>05. Why Does It Matter?</h2>
+            <p>
+                An attacker may trick a user into performing actions
+                they never intended, such as changing account settings,
+                approving actions, or confirming transactions.
+            </p>
+        </section>
+
+        <section class="sources-card">
+            <h2>06. Sources</h2>
+            <ul>
+                <li>
+                    <a href="https://owasp.org/www-community/attacks/Clickjacking"
+                       target="_blank" rel="noopener noreferrer">
+                        OWASP – Clickjacking
+                    </a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy/frame-ancestors"
+                       target="_blank" rel="noopener noreferrer">
+                        MDN – CSP frame-ancestors
+                    </a>
+                </li>
+                <li>
+                    <a href="https://cwe.mitre.org/data/definitions/1021.html"
+                       target="_blank" rel="noopener noreferrer">
+                        MITRE – CWE-1021
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        Interactive Web Security Sandbox © 2026
+    </footer>
+
+    <script src="../../js/clickjacking.js"></script>
+</body>
+</html>
