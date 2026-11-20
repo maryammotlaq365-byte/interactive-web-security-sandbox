@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Negative Quantity Lab | Security Sandbox</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="lab-page">
+
+    <header class="topbar">
+        <a href="../../index.html" class="brand">SECURITY SANDBOX</a>
+        <a href="../../index.html" class="back-link">← Back to Home</a>
+    </header>
+
+    <main class="container">
+
+        <section class="intro">
+            <span class="lab-label">INTERACTIVE SECURITY LAB 02</span>
+            <h1>Negative Quantity</h1>
+            <p>
+                Learn how a business logic flaw lets attackers manipulate
+                shopping cart totals using negative quantities.
+            </p>
+        </section>
+
+        <!-- 1. What it is -->
+        <section class="info-card">
+            <h2>01. What is Negative Quantity?</h2>
+            <p>
+                Negative Quantity is a business logic flaw that occurs when an
+                application accepts negative product quantities without proper
+                validation. An attacker may manipulate shopping cart calculations
+                and cause incorrect prices or unauthorized financial benefits.
+            </p>
+            <p><strong>OWASP:</strong> A04:2021 – Insecure Design</p>
+            <p><strong>CWE:</strong> CWE-1284 – Improper Validation of
+                Specified Quantity in Input</p>
+        </section>
+
+        <!-- 2. The line -->
+        <section class="code-card">
+            <h2>02. The Vulnerable Code</h2>
+            <p>
+                This check blocks zero but allows negative quantities,
+                which can reduce the cart total.
+            </p>
+            <pre><code>function addToCart() {
+    const inputValue = quantityInput.value.trim();
+    const quantity = Number(inputValue);
+
+    if (inputValue === "" || !Number.isInteger(quantity)) return;
+    <span class="vulnerable-line">if (quantity === 0) return;</span>
+
+    cartQuantity += quantity;
+    updateCart();
+}</code></pre>
+            <p class="warning">
+                <strong>Why it is vulnerable:</strong> Only zero is rejected, so
+                -5 passes the check and is subtracted from the cart.
+            </p>
+        </section>
+
+        <!-- 3. Try it -->
+        <section class="demo-card">
+            <div class="section-heading">
+                <div>
+                    <span class="step-label">03. TRY THE ATTACK</span>
+                    <h2>Interactive Demonstration</h2>
+                </div>
+                <span id="modeStatus" class="status vulnerable">
+                    Current Mode: Vulnerable
+                </span>
+            </div>
+
+            <p class="description">
+                Pick a payload, then add the product to the cart. Next, switch
+                to Fixed Mode and try the same payload again.
+            </p>
+
+            <div class="payloads">
+                <button class="payload-btn payload active" data-value="-1">
+                    Payload 1: -1
+                </button>
+                <button class="payload-btn payload" data-value="-5">
+                    Payload 2: -5
+                </button>
+                <button class="payload-btn payload" data-value="-10">
+                    Payload 3: -10
+                </button>
+            </div>
+
+            <div class="demo-stage shop-stage">
+                <h3>Premium Headphones</h3>
+                <p class="price">Price: $100</p>
+
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" value="1" step="1">
+
+                <button id="addToCart" class="claim-btn">Add to Cart</button>
+            </div>
+
+            <div id="result" class="result" aria-live="polite">
+                <p>Quantity: <span id="cartQuantity">0</span></p>
+                <p>Total: $<span id="total">0</span></p>
+                <p id="message"></p>
+                <button id="resetCart">Reset Cart</button>
+            </div>
+
+            <div class="mode-controls">
+                <button id="vulnerableMode" class="mode-btn selected">
+                    Vulnerable Mode
+                </button>
+                <button id="fixedMode" class="mode-btn">
+                    Fixed Mode
+                </button>
+            </div>
+        </section>
+
+        <!-- 4. Why it matters -->
+        <section class="impact-card">
+            <h2>04. Why Does It Matter?</h2>
+            <p>
+                Accepting negative quantities can reduce the cart total,
+                manipulate inventory calculations, and potentially cause
+                financial losses for an online store.
+            </p>
+            <p>
+                MITRE provides a shopping cart example where an application
+                calculates the total without checking whether the quantity
+                is negative. An attacker could receive an account credit
+                instead of being charged.
+            </p>
+        </section>
+
+        <!-- 5. The fix -->
+        <section class="code-card">
+            <h2>05. The Fix</h2>
+            <p>
+                Accept only positive whole numbers. In real applications, the
+                same check must also run on the server, not only in the browser.
+            </p>
+            <pre><code>function addToCart() {
+    const inputValue = quantityInput.value.trim();
+    const quantity = Number(inputValue);
+
+    if (inputValue === "" || !Number.isInteger(quantity)) return;
+    <span class="fixed-line">if (quantity &lt;= 0) return;</span>
+
+    cartQuantity += quantity;
+    updateCart();
+}</code></pre>
+            <p class="success">
+                <strong>Why it works:</strong> Zero and negative quantities are
+                rejected, so the same payloads can no longer lower the total.
+            </p>
+        </section>
+
+        <!-- 6. Sources -->
+        <section class="sources-card">
+            <h2>06. Sources</h2>
+            <ul>
+                <li>
+                    <a href="https://cwe.mitre.org/data/definitions/1284.html"
+                       target="_blank" rel="noopener noreferrer">
+                        MITRE – CWE-1284
+                    </a>
+                </li>
+                <li>
+                    <a href="https://top10.owasp.org/A04_2021-Insecure_Design/"
+                       target="_blank" rel="noopener noreferrer">
+                        OWASP – A04:2021 Insecure Design
+                    </a>
+                </li>
+                <li>
+                    <a href="https://cwe.mitre.org/data/definitions/840.html"
+                       target="_blank" rel="noopener noreferrer">
+                        MITRE – CWE-840
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        Interactive Web Security Sandbox © 2026
+    </footer>
+
+    <script src="../../js/negative-quantity.js"></script>
+</body>
+</html>

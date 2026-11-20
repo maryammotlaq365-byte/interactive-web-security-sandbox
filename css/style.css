@@ -1,0 +1,1174 @@
+/* ==============================
+   1. Global Settings
+============================== */
+
+:root {
+    --bg: #0f172a;
+    --bg-alt: #172438;
+    --card: #1e293b;
+    --border: #334155;
+    --border-soft: #334155;
+    --border-light: #475569;
+    --accent: #38bdf8;
+    --accent-heading: #38bdf8;
+    --accent-strong: #0284c7;
+    --text: #e2e8f0;
+    --text-muted: #cbd5e1;
+    --text-dim: #94a3b8;
+    --text-faint: #94a3b8;
+    --grad-start: #1e3a5f;
+    --grad-end: #172438;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* ==============================
+   2. Navigation Bar
+============================== */
+
+.navbar {
+    width: 100%;
+    min-height: 75px;
+    padding: 0 8%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--bg-alt);
+    border-bottom: 1px solid var(--border-soft);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+
+.logo span:last-child {
+    color: var(--accent);
+}
+
+.logo-icon {
+    color: var(--accent);
+    margin-right: 7px;
+}
+
+.navbar nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+}
+
+.navbar nav a {
+    color: var(--text-dim);
+    font-size: 14px;
+    transition: color 0.3s ease;
+}
+
+.navbar nav a:hover {
+    color: var(--accent);
+}
+
+/* ==============================
+   3. Hero Section
+============================== */
+
+.hero {
+    min-height: 570px;
+    padding: 90px 10%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    background:
+        radial-gradient(circle at 80% 40%, var(--grad-start) 0%, transparent 35%),
+        var(--bg);
+}
+
+.hero-content {
+    max-width: 620px;
+}
+
+.hero-label,
+.section-label {
+    color: var(--accent);
+    font-size: 12px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-bottom: 18px;
+}
+
+.hero h1 {
+    font-size: clamp(38px, 5vw, 62px);
+    line-height: 1.15;
+    margin-bottom: 24px;
+    color: #ffffff;
+}
+
+.hero h1 span {
+    display: block;
+    color: var(--accent);
+}
+
+.hero-description {
+    max-width: 540px;
+    color: var(--text-dim);
+    font-size: 16px;
+    margin-bottom: 32px;
+}
+
+.primary-button {
+    display: inline-block;
+    padding: 13px 28px;
+    background-color: var(--accent-strong);
+    border: 1px solid var(--accent);
+    color: #ffffff;
+    font-weight: bold;
+    border-radius: 8px;
+    transition: 0.3s ease;
+}
+
+.primary-button:hover {
+    filter: brightness(1.12);
+    transform: translateY(-3px);
+}
+
+/* ==============================
+   4. Hero Visual Card
+============================== */
+
+.hero-visual {
+    width: 340px;
+    flex-shrink: 0;
+}
+
+.security-card {
+    padding: 30px;
+    background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+    border: 1px solid var(--border-light);
+    border-radius: 16px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.security-icon {
+    font-size: 42px;
+    margin-bottom: 20px;
+}
+
+.security-card h3 {
+    color: var(--accent-heading);
+    font-size: 17px;
+    margin-bottom: 4px;
+}
+
+.security-card p {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.security-line {
+    height: 1px;
+    background-color: var(--border-light);
+    margin: 18px 0;
+}
+
+/* ==============================
+   5. Labs Section
+============================== */
+
+.labs-section {
+    padding: 90px 8%;
+    background-color: var(--bg-alt);
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 650px;
+    margin: 0 auto 50px;
+}
+
+.section-heading h2,
+.about-content h2 {
+    font-size: 34px;
+    margin-bottom: 14px;
+    color: var(--accent-heading);
+}
+
+.section-heading > p:last-child {
+    color: var(--text-dim);
+    font-size: 15px;
+}
+
+.labs-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 25px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ==============================
+   6. Lab Cards
+============================== */
+
+.lab-card {
+    position: relative;
+    padding: 30px;
+    min-height: 310px;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.lab-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+}
+
+.lab-number {
+    position: absolute;
+    top: 20px;
+    right: 22px;
+    color: #94a3b8;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.lab-icon {
+    font-size: 34px;
+    margin-bottom: 20px;
+}
+
+.lab-card h3 {
+    color: #ffffff;
+    font-size: 21px;
+    margin-bottom: 12px;
+}
+
+.lab-card p {
+    color: var(--text-muted);
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.lab-link {
+    display: inline-flex;
+    gap: 10px;
+    align-items: center;
+    color: var(--accent);
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.lab-link span {
+    transition: transform 0.3s ease;
+}
+
+.lab-link:hover span {
+    transform: translateX(5px);
+}
+
+/* ==============================
+   7. About Section
+============================== */
+
+.about-section {
+    padding: 85px 10%;
+    text-align: center;
+    background-color: var(--bg);
+}
+
+.about-content {
+    max-width: 750px;
+    margin: auto;
+}
+
+.about-content p:not(.section-label) {
+    color: var(--text-dim);
+    font-size: 15px;
+    margin-top: 15px;
+}
+
+/* ==============================
+   8. Footer
+============================== */
+
+.footer {
+    padding: 25px 8%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--bg-alt);
+    border-top: 1px solid var(--border-soft);
+    color: var(--text-faint);
+    font-size: 13px;
+}
+
+/* ==============================
+   9. Responsive Design
+============================== */
+
+@media (max-width: 900px) {
+    .hero {
+        padding: 70px 7%;
+        gap: 35px;
+    }
+
+    .hero-visual {
+        width: 290px;
+    }
+
+    .labs-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 650px) {
+    .navbar {
+        padding: 18px 5%;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navbar nav {
+        gap: 22px;
+    }
+
+    .hero {
+        padding: 60px 7%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .hero-visual {
+        width: 100%;
+    }
+
+    .labs-section {
+        padding: 65px 6%;
+    }
+
+    .labs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section-heading h2,
+    .about-content h2 {
+        font-size: 28px;
+    }
+
+    .footer {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+
+/* =========================================
+   10. Clickjacking Lab Styles
+   Scoped to lab pages only
+========================================= */
+
+.lab-page {
+    font-family: Arial, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+.lab-page a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.lab-page a:hover {
+    text-decoration: underline;
+}
+
+.lab-page .container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.lab-page header {
+    background: var(--bg-alt);
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.lab-page header h1 {
+    color: #ffffff;
+    font-size: 28px;
+}
+
+.lab-page header p {
+    color: var(--text-dim);
+}
+
+.lab-page .back-link {
+    display: inline-block;
+    margin-bottom: 12px;
+}
+
+.lab-page main {
+    padding: 35px 0;
+}
+
+.lab-page section {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 25px;
+    margin-bottom: 25px;
+}
+
+.lab-page h2 {
+    color: var(--accent-heading);
+    margin-bottom: 15px;
+}
+
+.lab-page h3 {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+
+.lab-page p {
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.lab-page button {
+    cursor: pointer;
+    font-family: inherit;
+    transition: 0.2s ease;
+}
+
+.lab-page button:hover {
+    filter: brightness(1.12);
+}
+
+.lab-page .payloads,
+.lab-page .payload-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin: 18px 0;
+}
+
+.lab-page .payload-btn,
+.lab-page .mode-btn {
+    padding: 11px 17px;
+    border: 1px solid var(--border-light);
+    border-radius: 8px;
+    background: #1e293b;
+    color: #ffffff;
+}
+
+.lab-page .payload-btn.active,
+.lab-page .mode-btn.selected {
+    background: var(--accent-strong);
+    border-color: var(--accent);
+}
+
+.lab-page .demo-stage {
+    position: relative;
+    min-height: 280px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--grad-start), var(--grad-end));
+    border: 1px solid var(--border-light);
+}
+
+.lab-page .decoy-content {
+    text-align: center;
+    padding: 30px;
+    position: relative;
+    z-index: 1;
+}
+
+.lab-page .reward-icon {
+    font-size: 45px;
+    display: block;
+    margin-bottom: 12px;
+}
+
+.lab-page .decoy-content p {
+    color: var(--text-muted);
+    margin-bottom: 18px;
+}
+
+.lab-page .claim-btn {
+    border: none;
+    padding: 13px 24px;
+    border-radius: 8px;
+    background: #f0b94c;
+    color: #172033;
+    font-weight: bold;
+    position: relative;
+    z-index: 3;
+}
+
+.lab-page #attack-frame {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    opacity: 0.03;
+    z-index: 4;
+    pointer-events: auto;
+}
+
+.lab-page .demo-stage.fixed #attack-frame {
+    display: none;
+}
+
+.lab-page .hint {
+    margin-top: 12px;
+    color: #94a3b8;
+    font-size: 13px;
+}
+
+.lab-page .result {
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 14px;
+    margin-top: 18px;
+    color: #ffffff;
+    min-height: 50px;
+}
+
+.lab-page .code-block {
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 18px;
+    overflow-x: auto;
+    margin-top: 12px;
+}
+
+.lab-page pre {
+    color: #cbd5e1;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.lab-page .vulnerable-code {
+    border-left: 4px solid #e45d68;
+}
+
+.lab-page .fixed-code {
+    border-left: 4px solid #42c98b;
+}
+
+.lab-page .mode-buttons,
+.lab-page .mode-controls {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.lab-page .status {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+.lab-page .status.vulnerable {
+    background: #57232b;
+    color: #ff9ba3;
+}
+
+.lab-page .status.fixed {
+    background: #164b37;
+    color: #8af0bd;
+}
+
+.lab-page footer {
+    text-align: center;
+    padding: 25px;
+    color: var(--text-faint);
+    border-top: 1px solid var(--border-soft);
+}
+
+@media (max-width: 600px) {
+    .lab-page header h1 {
+        font-size: 23px;
+    }
+
+    .lab-page section {
+        padding: 17px;
+    }
+
+    .lab-page .payloads,
+    .lab-page .payload-buttons,
+    .lab-page .mode-buttons,
+    .lab-page .mode-controls {
+        flex-direction: column;
+    }
+
+    .lab-page .payload-btn,
+    .lab-page .mode-btn {
+        width: 100%;
+    }
+
+    .lab-page .demo-stage {
+        min-height: 250px;
+    }
+}
+
+/* =========================================
+   11. Negative Quantity Lab Styles
+========================================= */
+
+.negative-quantity-page {
+    background: #0f172a;
+    color: #e2e8f0;
+    min-height: 100vh;
+}
+
+.negative-quantity-page header {
+    background: #172438;
+    text-align: center;
+    padding: 35px 20px;
+    border-bottom: 2px solid #334155;
+}
+
+.negative-quantity-page header h1 {
+    color: #38bdf8;
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.negative-quantity-page header p {
+    color: #94a3b8;
+}
+
+.negative-quantity-page main {
+    max-width: 850px;
+    margin: 35px auto;
+    padding: 20px;
+}
+
+.negative-quantity-page section {
+    background: #1e293b;
+    padding: 25px;
+    margin-bottom: 22px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+    transition: border-color 0.2s, transform 0.2s;
+}
+
+.negative-quantity-page section:hover {
+    border-color: #475569;
+}
+
+.negative-quantity-page h2 {
+    color: #38bdf8;
+    margin-bottom: 15px;
+}
+
+.negative-quantity-page h3 {
+    color: #facc15;
+    margin: 20px 0 12px;
+}
+
+.negative-quantity-page p {
+    color: #cbd5e1;
+}
+
+.negative-quantity-page .lab-info p {
+    line-height: 1.6;
+}
+
+.negative-quantity-page .mode-buttons,
+.negative-quantity-page .payload-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin: 15px 0;
+}
+
+.negative-quantity-page button {
+    background: #0284c7;
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+    transition: background 0.2s, transform 0.2s;
+}
+
+.negative-quantity-page button:hover {
+    background: #0369a1;
+    transform: translateY(-2px);
+}
+
+.negative-quantity-page button:active {
+    transform: translateY(0);
+}
+
+.negative-quantity-page #fixedMode {
+    background: #15803d;
+}
+
+.negative-quantity-page #fixedMode:hover {
+    background: #166534;
+}
+
+.negative-quantity-page #modeStatus {
+    color: #facc15;
+    font-weight: bold;
+    margin-top: 12px;
+}
+
+.negative-quantity-page .price {
+    font-size: 20px;
+    margin: 15px 0;
+    color: #4ade80;
+}
+
+.negative-quantity-page label {
+    display: block;
+    margin-bottom: 8px;
+}
+
+.negative-quantity-page input {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 7px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: white;
+    font-size: 16px;
+}
+
+.negative-quantity-page input:focus {
+    outline: 2px solid #38bdf8;
+    border-color: #38bdf8;
+}
+
+.negative-quantity-page .payload {
+    background: #b45309;
+}
+
+.negative-quantity-page .payload:hover {
+    background: #92400e;
+}
+
+.negative-quantity-page .cart p {
+    margin: 12px 0;
+    font-size: 18px;
+}
+
+.negative-quantity-page #total {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.negative-quantity-page #message {
+    color: #fbbf24;
+    margin: 15px 0;
+    line-height: 1.5;
+}
+
+.negative-quantity-page #resetCart {
+    background: #475569;
+}
+
+.negative-quantity-page .code-section pre {
+    background: #0b1120;
+    padding: 18px;
+    border-radius: 8px;
+    overflow-x: auto;
+    white-space: pre;
+    font-size: 14px;
+    line-height: 1.8;
+    margin: 12px 0 25px;
+    border: 1px solid #334155;
+}
+
+.negative-quantity-page .code-section code {
+    color: #cbd5e1;
+    font-family: monospace;
+}
+
+.negative-quantity-page .vulnerable-line {
+    display: inline-block;
+    width: 100%;
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.negative-quantity-page .fixed-line {
+    display: inline-block;
+    width: 100%;
+    background: rgba(34, 197, 94, 0.18);
+    color: #4ade80;
+    font-weight: bold;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.negative-quantity-page .security-info {
+    background: #0f172a;
+    border-left: 4px solid #38bdf8;
+    padding: 15px;
+    margin: 18px 0;
+    border-radius: 6px;
+}
+
+.negative-quantity-page .security-info p {
+    margin: 8px 0;
+    line-height: 1.5;
+}
+
+.negative-quantity-page .impact-section p {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin: 12px 0;
+}
+
+.negative-quantity-page .impact-section h3 {
+    margin-top: 22px;
+}
+
+.negative-quantity-page .references {
+    padding-left: 22px;
+    line-height: 2;
+}
+
+.negative-quantity-page .references li {
+    margin-bottom: 5px;
+}
+
+.negative-quantity-page .references a {
+    color: #38bdf8;
+    text-decoration: none;
+}
+
+.negative-quantity-page .references a:hover {
+    color: #7dd3fc;
+    text-decoration: underline;
+}
+
+@media (max-width: 600px) {
+    .negative-quantity-page header {
+        padding: 25px 15px;
+    }
+
+    .negative-quantity-page header h1 {
+        font-size: 28px;
+    }
+
+    .negative-quantity-page main {
+        padding: 12px;
+        margin: 20px auto;
+    }
+
+    .negative-quantity-page section {
+        padding: 18px;
+    }
+
+    .negative-quantity-page button {
+        width: 100%;
+    }
+
+    .negative-quantity-page .code-section pre {
+        font-size: 12px;
+        padding: 12px;
+    }
+}
+
+/* =========================================
+   12. Code Highlighting (lab pages)
+========================================= */
+
+.lab-page .code-card pre {
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 18px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.lab-page .code-card code {
+    font-family: monospace;
+    color: #cbd5e1;
+}
+
+.lab-page .hl-bad,
+.lab-page .hl-good {
+    display: inline-block;
+    width: 100%;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.lab-page .hl-bad {
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+}
+
+.lab-page .hl-good {
+    background: rgba(34, 197, 94, 0.18);
+    color: #4ade80;
+}
+
+/* =========================================
+   13. Negative Quantity Lab (uses .lab-page)
+========================================= */
+
+.lab-page .vulnerable-line,
+.lab-page .fixed-line {
+    display: inline-block;
+    width: 100%;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.lab-page .vulnerable-line {
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+}
+
+.lab-page .fixed-line {
+    background: rgba(34, 197, 94, 0.18);
+    color: #4ade80;
+}
+
+.lab-page .shop-stage {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+    gap: 6px;
+}
+
+.lab-page .price {
+    color: #4ade80;
+    font-size: 20px;
+}
+
+.lab-page label {
+    display: block;
+    color: #cbd5e1;
+}
+
+.lab-page input[type="number"] {
+    width: 140px;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 7px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+}
+
+.lab-page input[type="number"]:focus {
+    outline: 2px solid #38bdf8;
+    border-color: #38bdf8;
+}
+
+.lab-page .result #total {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.lab-page .result #message {
+    color: #fbbf24;
+}
+
+.lab-page #resetCart {
+    padding: 9px 16px;
+    border: 1px solid #475569;
+    border-radius: 7px;
+    background: #334155;
+    color: #ffffff;
+}
+
+/* =========================================
+   12. Code Highlighting (lab pages)
+========================================= */
+
+.lab-page .code-card pre {
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 18px;
+    overflow-x: auto;
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.lab-page .code-card code {
+    font-family: monospace;
+    color: #cbd5e1;
+}
+
+.lab-page .hl-bad,
+.lab-page .hl-good {
+    display: inline-block;
+    width: 100%;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.lab-page .hl-bad {
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+}
+
+.lab-page .hl-good {
+    background: rgba(34, 197, 94, 0.18);
+    color: #4ade80;
+}
+
+/* =========================================
+   13. Negative Quantity Lab (uses .lab-page)
+========================================= */
+
+.lab-page .vulnerable-line,
+.lab-page .fixed-line {
+    display: inline-block;
+    width: 100%;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-weight: bold;
+}
+
+.lab-page .vulnerable-line {
+    background: rgba(239, 68, 68, 0.18);
+    color: #f87171;
+}
+
+.lab-page .fixed-line {
+    background: rgba(34, 197, 94, 0.18);
+    color: #4ade80;
+}
+
+.lab-page .shop-stage {
+    flex-direction: column;
+    text-align: center;
+    padding: 30px;
+    gap: 6px;
+}
+
+.lab-page .price {
+    color: #4ade80;
+    font-size: 20px;
+}
+
+.lab-page label {
+    display: block;
+    color: #cbd5e1;
+}
+
+.lab-page input[type="number"] {
+    width: 140px;
+    padding: 10px;
+    margin-bottom: 12px;
+    border-radius: 7px;
+    border: 1px solid #475569;
+    background: #0f172a;
+    color: #ffffff;
+    font-size: 16px;
+    text-align: center;
+}
+
+.lab-page input[type="number"]:focus {
+    outline: 2px solid #38bdf8;
+    border-color: #38bdf8;
+}
+
+.lab-page .result #total {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.lab-page .result #message {
+    color: #fbbf24;
+}
+
+.lab-page #resetCart {
+    padding: 9px 16px;
+    border: 1px solid #475569;
+    border-radius: 7px;
+    background: #334155;
+    color: #ffffff;
+}
+
+/* =========================================
+   14. Prototype Pollution Lab (uses .lab-page)
+========================================= */
+
+.lab-page .payload-view {
+    background: #0b1120;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    color: #fbbf24;
+    font-family: monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.lab-page .result.multiline {
+    white-space: pre-line;
+}
+
+.lab-page .result .verdict-bad {
+    color: #f87171;
+    font-weight: bold;
+}
+
+.lab-page .result .verdict-good {
+    color: #4ade80;
+    font-weight: bold;
+}

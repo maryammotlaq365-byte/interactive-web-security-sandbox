@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prototype Pollution Lab | Security Sandbox</title>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+<body class="lab-page">
+
+    <header class="topbar">
+        <a href="../../index.html" class="brand">SECURITY SANDBOX</a>
+        <a href="../../index.html" class="back-link">← Back to Home</a>
+    </header>
+
+    <main class="container">
+
+        <section class="intro">
+            <span class="lab-label">INTERACTIVE SECURITY LAB 03</span>
+            <h1>Prototype Pollution</h1>
+            <p>
+                Learn how one unsafe merge can change the properties of
+                every object in a JavaScript application.
+            </p>
+        </section>
+
+        <section class="info-card">
+            <h2>01. What is Prototype Pollution?</h2>
+            <p>
+                Prototype Pollution happens when an application merges untrusted
+                input into an object without checking the keys. The attacker can
+                then change the prototype that other objects inherit from.
+                Every object then receives properties the attacker chose.
+            </p>
+            <p><strong>OWASP:</strong> A08:2021 – Software and Data Integrity Failures</p>
+            <p><strong>CWE:</strong> CWE-1321 – Improperly Controlled Modification
+                of Object Prototype Attributes</p>
+        </section>
+
+        <section class="code-card">
+            <h2>02. The Vulnerable Code</h2>
+            <p>
+                A recursive merge function, used to apply user settings.
+            </p>
+            <pre><code>function merge(target, source) {
+  for (const key in source) {
+    if (typeof source[key] === "object" &amp;&amp; source[key] !== null) {
+      target[key] = target[key] || {};
+      <span class="hl-bad">merge(target[key], source[key]);</span>
+    } else {
+      target[key] = source[key];
+    }
+  }
+  return target;
+}
+
+merge(userSettings, JSON.parse(input));</code></pre>
+            <p class="warning">
+                <strong>Why it is vulnerable:</strong> The function follows any
+                key it receives. With the key <code>__proto__</code>,
+                <code>target[key]</code> is the shared prototype, so the merge
+                writes into it.
+            </p>
+        </section>
+
+        <section class="demo-card">
+            <div class="section-heading">
+                <div>
+                    <span class="step-label">03. TRY THE ATTACK</span>
+                    <h2>Interactive Demonstration</h2>
+                </div>
+                <span id="mode-status" class="status vulnerable">
+                    VULNERABLE
+                </span>
+            </div>
+
+            <p class="description">
+                Alice sends a payload as her settings. Then we check a different
+                user, "guest", who sent nothing. Run a payload in Vulnerable
+                Mode, then switch to Fixed Mode and run it again.
+            </p>
+
+            <div class="payloads">
+                <button class="payload-btn" data-index="0">
+                    Payload 1: __proto__ → isAdmin
+                </button>
+                <button class="payload-btn" data-index="1">
+                    Payload 2: constructor.prototype → role
+                </button>
+                <button class="payload-btn" data-index="2">
+                    Payload 3: __proto__ → canDelete
+                </button>
+            </div>
+
+            <div class="payload-view" id="payload-view">
+                Select a payload to see the input.
+            </div>
+
+            <div id="result" class="result multiline" aria-live="polite">
+                Waiting for your interaction...
+            </div>
+
+            <p class="hint">
+                This is a safe simulation. Only a demo "User" class is changed,
+                never the real <code>Object.prototype</code> of this page.
+            </p>
+
+            <div class="mode-controls">
+                <button id="vulnerable-btn" class="mode-btn selected">
+                    Vulnerable Mode
+                </button>
+                <button id="fixed-btn" class="mode-btn">
+                    Fixed Mode
+                </button>
+            </div>
+        </section>
+
+        <section class="impact-card">
+            <h2>04. Why Does It Matter?</h2>
+            <p>
+                A polluted prototype can switch on flags like
+                <code>isAdmin</code> for every user, bypass checks, or crash the
+                application.
+            </p>
+            <p>
+                <strong>Real incident:</strong> In 2019, CVE-2019-10744 was found
+                in <code>defaultsDeep</code> of lodash, one of the most used npm
+                libraries. A crafted <code>constructor.prototype</code> payload
+                could add properties to all objects. It was rated 9.1 (critical).
+            </p>
+        </section>
+
+        <section class="code-card">
+            <h2>05. The Fix</h2>
+            <p>
+                Skip the dangerous keys before following them.
+            </p>
+            <pre><code>function merge(target, source) {
+  for (const key in source) {
+    <span class="hl-good">if (key === "__proto__" || key === "constructor" || key === "prototype") continue;</span>
+    if (typeof source[key] === "object" &amp;&amp; source[key] !== null) {
+      target[key] = target[key] || {};
+      merge(target[key], source[key]);
+    } else {
+      target[key] = source[key];
+    }
+  }
+  return target;
+}</code></pre>
+            <p class="success">
+                <strong>Why it works:</strong> The merge never walks into the
+                prototype, so the same payloads change nothing. Safer options:
+                <code>Object.create(null)</code> objects or a <code>Map</code>.
+            </p>
+        </section>
+
+        <section class="sources-card">
+            <h2>06. Sources</h2>
+            <ul>
+                <li>
+                    <a href="https://cwe.mitre.org/data/definitions/1321.html"
+                       target="_blank" rel="noopener noreferrer">
+                        MITRE – CWE-1321
+                    </a>
+                </li>
+                <li>
+                    <a href="https://nvd.nist.gov/vuln/detail/CVE-2019-10744"
+                       target="_blank" rel="noopener noreferrer">
+                        NVD – CVE-2019-10744 (lodash)
+                    </a>
+                </li>
+                <li>
+                    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Inheritance_and_the_prototype_chain"
+                       target="_blank" rel="noopener noreferrer">
+                        MDN – Inheritance and the prototype chain
+                    </a>
+                </li>
+            </ul>
+        </section>
+
+    </main>
+
+    <footer>
+        Interactive Web Security Sandbox © 2026
+    </footer>
+
+    <script src="../../js/prototype-pollution.js"></script>
+</body>
+</html>
